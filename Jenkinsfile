@@ -2,35 +2,44 @@ pipeline {
     agent any
 
     tools {
-        jdk 'JDK'
+        jdk 'JDK17'
         maven 'maven'
     }
 
     stages {
-        
 
-        stage('Build & Test') {
+        stage('Checkout') {
             steps {
-                sh 'mvn clean test package'
+                checkout scm
             }
         }
 
-        stage('Run App') {
+        stage('Build') {
             steps {
-                sh 'java -jar target/Firefox-1.0-SNAPSHOT.jar'
+                sh 'mvn clean package'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                sh 'mvn test'
+            }
+        }
+
+        stage('Run Application') {
+            steps {
+                sh 'mvn exec:java -Dexec.mainClass="com.example.App"'
             }
         }
     }
 
     post {
         success {
-            echo 'Build Successful!'
+            echo 'Build, Test, and Execution Successful!'
         }
+
         failure {
             echo 'Build Failed!'
-        }
-        always {
-            archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
         }
     }
 }
