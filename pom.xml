@@ -6,10 +6,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.example</groupId>
-    <artifactId>MyMavenSeleniumFirefoxApp04</artifactId>
+    <artifactId>Firefox</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
-    <name>MyMavenSeleniumFirefoxApp04</name>
+    <name>Firefox</name>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
